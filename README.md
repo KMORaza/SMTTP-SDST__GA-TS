@@ -22,3 +22,10 @@ $C_i =$ _Completion time of previous job_ $+$ _Setup time between previous & cur
 * Tardiness of job is $T_i = max$($0,C_i-d_i$)
 * Weighted taardiness of job is $WT_i = T_i × w_i$
 * Total tardiness is $T_{total} = ΣWT_i = Σmax(0,C_i-d_i)×w_i$
+
+__(3) GENETIC ALGORITHM__
+
+Genetic Algorithm is to explore the search space of possible job sequences to find one that minimizes the total tardiness.
+* Population Initialization - Generate an initial population of random job sequences. Each individual (solution) in the population represents a permutation of jobs. The fitness of each solution is the total tardiness $T_{total}$ calculated for the sequence.
+*  Selection - Select two parent solutions $P_1$ and $P_2$ based on their fitness. Typically, solutions with lower total tardiness are selected.
+*  Crossover - Crossover is applied to generate two offspring solutions. Suppose we have two parents, $P1 = [J_{i_1}]$
