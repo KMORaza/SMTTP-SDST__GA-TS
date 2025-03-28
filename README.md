@@ -3,4 +3,4 @@
 
 __(1) Problem Definition__
 
-For a given set of jobs $J = J₁, J₂, J₃,...,Jₙ$
+For a given set of jobs $J = J₁, J₂, J₃,...,Jₙ, J_n$
