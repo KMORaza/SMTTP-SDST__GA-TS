@@ -18,4 +18,5 @@ For each job $J_i$, the completion time $C_i$ is given by:
 $C_i =$ _Completion time of previous job_ $+$ _Setup time between previous & current job_ $+$ _Processing time of current job_
 
 * If $i=1$, $C_1 = p_1$
-* For subsequent jobs $i>1$, then completion time becomes $C_i = C_{i-1} + s_{i-1,i} + p_i$ 
+* For subsequent jobs $i>1$, then completion time becomes $C_i = C_{i-1} + s_{i-1,i} + p_i$
+* Tardiness of job is: $T_i = max$($0,C_i-d_i$)
