@@ -3,4 +3,4 @@
 
 __(1) Problem Definition__
 
-For a given set of jobs $J$
+For a given set of jobs $J={}$
