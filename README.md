@@ -20,4 +20,5 @@ $C_i =$ _Completion time of previous job_ $+$ _Setup time between previous & cur
 * If $i=1$, $C_1 = p_1$
 * For subsequent jobs $i>1$, then completion time becomes $C_i = C_{i-1} + s_{i-1,i} + p_i$
 * Tardiness of job is $T_i = max$($0,C_i-d_i$)
-* Weighted taardiness of job is $WT_i = T_i×w_i$
+* Weighted taardiness of job is $WT_i = T_i × w_i$
+* Total tardiness is $T_{total} = ΣWT_i = Σmax$($0,C_i-d_i$)$× w_i$
