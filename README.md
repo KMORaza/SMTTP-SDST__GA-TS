@@ -26,6 +26,30 @@ $C_i =$ _Completion time of previous job_ $+$ _Setup time between previous & cur
 __(3) GENETIC ALGORITHM__
 
 Genetic Algorithm is to explore the search space of possible job sequences to find one that minimizes the total tardiness.
-* Population Initialization - Generate an initial population of random job sequences. Each individual (solution) in the population represents a permutation of jobs. The fitness of each solution is the total tardiness $T_{total}$ calculated for the sequence.
-*  Selection - Select two parent solutions $P_1$ and $P_2$ based on their fitness. Typically, solutions with lower total tardiness are selected.
-*  Crossover - Crossover is applied to generate two offspring solutions. Suppose we have two parents, $P_1 = [J_{i_1}, J_{i_2}, J_{i_3},....,J_{i_n}]$ and $P_2 = [J_{j_1}, J_{j_2}, J_{j_3},....,J_{j_n}]$
+* _Population Initialization_ - Generate an initial population of random job sequences. Each individual (solution) in the population represents a permutation of jobs. The fitness of each solution is the total tardiness $T_{total}$ calculated for the sequence.
+*  _Selection_ - Select two parent solutions $P_1$ and $P_2$ based on their fitness. Typically, solutions with lower total tardiness are selected.
+*  _Crossover_ - Crossover is applied to generate two offspring solutions. Suppose we have two parents, $P_1 = [J_{i_1}, J_{i_2}, J_{i_3},....,J_{i_n}]$ and $P_2 = [J_{j_1}, J_{j_2}, J_{j_3},....,J_{j_n}]$
+  * Select a segment from the first parent, e.g., a subset of jobs from positions $l$ to $r$ in $P_1$
+  * Copy this segment to the child sequence.
+  * Fill the remaining positions with jobs from $P_2$, maintaining the relative order of jobs from $P_2$, ensuring no repetitions.
+* _Mutation_ - Randomly swap two jobs in a sequence to introduce small variations. For a sequence $S = [J_1,J_2,J_3....J_n]$,  a mutation operation randomly selects two indices $i$ and $j$ and swaps the corresponding jobs $S_{mutated} = [J_1,....J_i,J_j....J_n]$. The mutation rate is typically low to ensure that exploration is balanced with exploitation.
+* _Fitness Evaluation_ - After crossover and mutation, evaluate the fitness (total tardiness) of the new offspring using the formula for total tardiness $T_{total} = Σmax(0,C_i-d_i)×w_i$.
+* _Survival Selection_ - The next population is formed by selecting the best individuals from the current population and the newly generated offspring. This step ensures that the population evolves toward better solutions.
+
+__(4) TABU SEARCH FOR LOCAL REFINEMENT__
+
+After applying Genetic Algorithm operations (selection, crossover, mutation), Tabu Search is used to improve the best solutions found by GA through local search.
+* _Neighbor Generation_ - A neighbor solution is created by swapping two jobs in the current solution sequence. For a solution $S = [J_1,J_2,J_3....J_n]$, a neighbor is created by swapping jobs $J_i$ and $J_j$: $S_{neighbor} = [J_1,....J_i,J_j....J_n]$
+* _Tabu Search_
+  * Maintain a Tabu List to store recently made moves (e.g., job swaps) to avoid revisiting them. Each move is associated with a Tabu Tenure (a number of iterations the move should be forbidden).
+  * If a swap results in a better solution, even if it's in the Tabu List, it might still be accepted, which is called Aspiration Criteria.
+* _Move Evaluation_ - After generating the neighbors, each move is evaluated based on the total tardiness formula. If a swap results in a better total tardiness (lower tardiness), then that solution becomes the new current solution.
+* _Tabu Update_ - After selecting the best neighbor, update the Tabu List by adding the recent move. If the list exceeds the Tabu Tenure, remove the oldest entries.
+
+__(5) STOPPING CRITERIA__
+
+The algorithm stops after a predefined number of generations or when a stopping condition is met (e.g., no improvement in several iterations).
+
+__(6) BEST SOLUTION__
+
+The best sequence $S_{best}$ found by algorithm, with the lowest totat tardiness $T_{total}$, is returned as the optimal or near-optimal solution. 
